@@ -2,31 +2,11 @@ import { StyleSheet, Text, View, Image, ImageBackground, SectionList } from 'rea
 import GameCard from './components/GameCard';
 import dados from './assets/dados.json';
 import DiaCard from './components/DiaCard';
+import { formatarData, agruparPorData } from './utils/formatters';
 
 export default function App() {
 
   const jogos = dados.jogos;
-
-  const formatarData = (data) => {
-    const [ano, mes, dia] = data.split('-');
-    return `${dia}/${mes}`;
-  };
-
-  const agruparPorData = (jogos) => {
-    return jogos.reduce((acc, jogo) => {
-
-      const data = jogo.data_brasilia;
-
-      if (!acc[data]) {
-        acc[data] = [];
-      }
-
-      acc[data].push(jogo);
-
-      return acc;
-
-    }, {});
-  };
 
   const jogosAgrupados = agruparPorData(jogos);
 
