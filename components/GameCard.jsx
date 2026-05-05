@@ -1,14 +1,7 @@
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet } from 'react-native'
+import { logos } from '../mappers/logos'
 
 export default function GameCard({ game }) {
-
-    const  flags = {
-        MEX: require('../assets/jogos/mexico.png'),
-        RSA: require('../assets/jogos/south africa.png'),
-        KOR: require('../assets/jogos/south korea.png'),
-        CZE: require('../assets/jogos/czech republic.png'),
-    }
-
     return (
         <View style={styles.jogo}>
 
@@ -21,7 +14,7 @@ export default function GameCard({ game }) {
                 <View style={styles.time}>
                     <Image
                         style={styles.bandeira}
-                        source={flags[game.sigla_casa]}
+                        source={logos[game.sigla_casa]}
                     />
                     <Text style={styles.sigla}>{game.sigla_casa}</Text>
                 </View>
@@ -35,7 +28,7 @@ export default function GameCard({ game }) {
                     <Text style={styles.sigla}>{game.sigla_fora}</Text>
                     <Image
                         style={styles.bandeira}
-                        source={flags[game.sigla_fora]}
+                        source={logos[game.sigla_fora]}
                     />
                 </View>
 
@@ -50,7 +43,6 @@ export default function GameCard({ game }) {
 
         </View>
     )
-
 }
 
 const styles = StyleSheet.create({
@@ -102,4 +94,4 @@ const styles = StyleSheet.create({
     color: '#8fa3b8',
     fontSize: 12
   }
-});
+})
