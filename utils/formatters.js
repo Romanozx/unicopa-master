@@ -4,7 +4,7 @@ export const formatarData = (data) => {
 };
 
 export const agruparPorData = (jogos) => {
-  return jogos.reduce((acc, jogo) => {
+  const agrupados = jogos.reduce((acc, jogo) => {
 
     const data = jogo.data_brasilia;
 
@@ -17,4 +17,12 @@ export const agruparPorData = (jogos) => {
     return acc;
 
   }, {});
+
+  Object.keys(agrupados).forEach((data) => {
+    agrupados[data].sort((a, b) => {
+      return a.hora_brasilia.localeCompare(b.hora_brasilia);
+    });
+  });
+
+  return agrupados;
 };
