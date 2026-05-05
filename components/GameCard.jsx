@@ -1,48 +1,51 @@
-import { View, Text, Image, StyleSheet } from 'react-native'
-import { logos } from '../mappers/logos'
+import { View, Text, Image, StyleSheet } from 'react-native';
+import { logos } from '../mappers/logos';
 
 export default function GameCard({ game }) {
-    return (
-        <View style={styles.jogo}>
 
-            <Text style={styles.grupo}>
-                GRUPO {game.grupo}  {game.confronto}
-            </Text>
+  const isBrasil = game.sigla_casa === 'BRA' || game.sigla_fora === 'BRA';
 
-            <View style={styles.linhaPrincipal}>
+  return (
+    <View style={[styles.jogo, isBrasil && styles.destaque]}>
 
-                <View style={styles.time}>
-                    <Image
-                        style={styles.bandeira}
-                        source={logos[game.sigla_casa]}
-                    />
-                    <Text style={styles.sigla}>{game.sigla_casa}</Text>
-                </View>
+      <Text style={styles.grupo}>
+        GRUPO {game.grupo} {game.confronto}
+      </Text>
 
-                <View style={styles.horario}>
-                    <Text style={styles.hora}>{game.hora_brasilia}</Text>
-                    <Text style={styles.subTitulo}>VS</Text>
-                </View>
+      <View style={styles.linhaPrincipal}>
 
-                <View style={styles.time}>
-                    <Text style={styles.sigla}>{game.sigla_fora}</Text>
-                    <Image
-                        style={styles.bandeira}
-                        source={logos[game.sigla_fora]}
-                    />
-                </View>
-
-            </View>
-
-            <View style={styles.local}>
-                <Text style={styles.subTitulo}>{game.estadio}</Text>
-                <Text style={styles.subTitulo}>
-                    {game.cidade} • {game.pais}
-                </Text>
-            </View>
-
+        <View style={styles.time}>
+          <Image
+            style={styles.bandeira}
+            source={logos[game.sigla_casa]}
+          />
+          <Text style={styles.sigla}>{game.sigla_casa}</Text>
         </View>
-    )
+
+        <View style={styles.horario}>
+          <Text style={styles.hora}>{game.hora_brasilia}</Text>
+          <Text style={styles.subTitulo}>VS</Text>
+        </View>
+
+        <View style={styles.time}>
+          <Text style={styles.sigla}>{game.sigla_fora}</Text>
+          <Image
+            style={styles.bandeira}
+            source={logos[game.sigla_fora]}
+          />
+        </View>
+
+      </View>
+
+      <View style={styles.local}>
+        <Text style={styles.subTitulo}>{game.estadio}</Text>
+        <Text style={styles.subTitulo}>
+          {game.cidade} • {game.pais}
+        </Text>
+      </View>
+
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -51,6 +54,11 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#1e2d3d',
     paddingBottom: 15
+  },
+  destaque: {
+    backgroundColor: '#1f3b73',
+    borderRadius: 10,
+    padding: 10
   },
   grupo: {
     color: '#8fa3b8',
@@ -94,4 +102,4 @@ const styles = StyleSheet.create({
     color: '#8fa3b8',
     fontSize: 12
   }
-})
+});
