@@ -1,35 +1,40 @@
 import { StyleSheet, Text, View, Image, ImageBackground, SectionList } from 'react-native';
 import GameCard from './components/GameCard';
-import dados from './assets/dados.json'
+import dados from './assets/dados.json';
 
 export default function App() {
 
-  const jogos = dados.jogos
+  const jogos = dados.jogos;
+
+  const formatarData = (data) => {
+    const [ano, mes, dia] = data.split('-');
+    return `${dia}/${mes}`;
+  };
 
   const agruparPorData = (jogos) => {
     return jogos.reduce((acc, jogo) => {
 
-      const data = jogo.data_brasilia
+      const data = jogo.data_brasilia;
 
       if (!acc[data]) {
-        acc[data] = []
+        acc[data] = [];
       }
 
-      acc[data].push(jogo)
+      acc[data].push(jogo);
 
-      return acc
+      return acc;
 
-    }, {})
-  }
+    }, {});
+  };
 
-  const jogosAgrupados = agruparPorData(jogos)
+  const jogosAgrupados = agruparPorData(jogos);
 
   const jogosTratados = Object.keys(jogosAgrupados).map(data => {
     return {
-      title: data,
+      title: formatarData(data),
       data: jogosAgrupados[data]
-    }
-  })
+    };
+  });
 
   return (
     <ImageBackground style={styles.container}
@@ -54,13 +59,8 @@ export default function App() {
                 ))
               }
 
-
-
           </View>
-        )
-        }
-
-
+        )}
       />
 
     </ImageBackground>
